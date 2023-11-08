@@ -10,6 +10,7 @@ export interface IUser {
     createdEventsId: string[];
     joinedEventsId: string[];
     idCategories: string[];
+    denuncias: string[];
 }
 
 export interface IUserModel extends IUser, Document {}
@@ -24,7 +25,8 @@ const UserSchema: Schema = new Schema(
         avatar: { type: String, required: false },
         createdEventsId: [{ type: Schema.Types.ObjectId, required: false, ref: 'Event' }],
         joinedEventsId: [{ type: Schema.Types.ObjectId, required: false, ref: 'Event' }],
-        idCategories: [{ type: Schema.Types.ObjectId, required: false, ref: 'Category' }]
+        idCategories: [{ type: Schema.Types.ObjectId, required: false, ref: 'Category' }],
+        denuncias: [{ type: Schema.Types.ObjectId, required: false, ref: 'Denuncia' }]
     },
     {
         versionKey: false,

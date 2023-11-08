@@ -7,6 +7,7 @@ import { IMessage } from '../models/Message';
 import { IChat } from '../models/Chat';
 import { IComment } from '../models/Comment';
 import { ICategory } from '../models/Category';
+import { IDenuncia } from '../models/Denuncia';
 
 export const ValidateSchema = (schema: ObjectSchema) => {
     return async (req: Request, res: Response, next: NextFunction) => {
@@ -31,6 +32,7 @@ export const Schemas = {
             avatar: Joi.string().optional(),
             createdEventsId: Joi.array().items(Joi.string().optional()),
             joinedEventsId: Joi.array().items(Joi.string().optional()),
+            denuncias: Joi.array().items(Joi.string().optional()),
             idCategories: Joi.array().items(Joi.string().optional())
         }),
         update: Joi.object<IUser>({
@@ -41,6 +43,7 @@ export const Schemas = {
             avatar: Joi.string().optional(),
             createdEventsId: Joi.array().items(Joi.string().optional()),
             joinedEventsId: Joi.array().items(Joi.string().optional()),
+            denuncias: Joi.array().items(Joi.string().optional()),
             idCategories: Joi.array().items(Joi.string().optional())
         })
     },
@@ -152,6 +155,26 @@ export const Schemas = {
                 .required(),
             text: Joi.string().required(),
             punctuation: Joi.number().optional()
+        })
+    },
+    denuncia: {
+        create: Joi.object<IDenuncia>({
+            idUser: Joi.string()
+                .regex(/^[0-9a-fA-F]{24}/)
+                .optional(),
+            fecha: Joi.date().required(),
+            descripcion: Joi.string().required(),
+            titulo: Joi.string().required(),
+            gravedad: Joi.number().required()
+        }),
+        update: Joi.object<IDenuncia>({
+            idUser: Joi.string()
+                .regex(/^[0-9a-fA-F]{24}/)
+                .optional(),
+            fecha: Joi.date().required(),
+            descripcion: Joi.string().required(),
+            titulo: Joi.string().required(),
+            gravedad: Joi.number().required()
         })
     }
 };

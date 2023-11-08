@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import User from '../models/User';
 
 const createUser = (req: Request, res: Response, next: NextFunction) => {
-    const { userName, email, birthDate, password, avatar, createdEventsId, joinedEventsId, idCategories } = req.body;
+    const { userName, email, birthDate, password, avatar, createdEventsId, joinedEventsId, idCategories, denuncias } = req.body;
 
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
@@ -14,7 +14,8 @@ const createUser = (req: Request, res: Response, next: NextFunction) => {
         avatar,
         createdEventsId,
         joinedEventsId,
-        idCategories
+        idCategories,
+        denuncias
     });
 
     return user
